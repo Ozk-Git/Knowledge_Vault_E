@@ -27,18 +27,30 @@ Unlike ordinary note-taking apps (Obsidian, Notion), what makes this different i
 
 ### 1. Setup
 
-Clone the repository and initialize:
+Clone the repository and initialize.
+
+#### 1-1. VS Code (Recommended)
+
+No GitHub CLI required — clone directly from the GUI.
+
+1. **Launch VS Code**
+2. **Click the "Source Control" icon in the left sidebar**
+   - It's the branching icon (Y-shape) in the left icon bar.
+3. **Click "Clone Repository"**
+   - Shown at the top of the Source Control panel.
+4. **Paste the URL and press Enter**
+   ```
+   https://github.com/Ozk-Git/Knowledge_Vault_E.git
+   ```
+5. **Select a destination folder**
+   - In the file dialog, choose the directory where you want to place Knowledge Vault.
+   - When a confirmation dialog appears, click "Open" to open the cloned folder in VS Code.
+
+#### 1-2. Terminal
 
 ```bash
-git clone https://github.com/<your-username>/Knowledge_Vault_E.git
+git clone https://github.com/Ozk-Git/Knowledge_Vault_E.git
 cd Knowledge_Vault_E
-
-# Create initial files from templates
-cp index.template.md index.md
-cp log.template.md log.md
-
-# Create required directories
-mkdir -p Inbox Daily Clippings Literature Permanent References/papers References/books Papers
 ```
 
 ### 2. Launch an AI Agent
