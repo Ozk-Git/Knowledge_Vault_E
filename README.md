@@ -27,7 +27,13 @@ Unlike ordinary note-taking apps (Obsidian, Notion), what makes this different i
 
 ### 1. Setup
 
-Clone the repository and initialize.
+Click **"Use this template" → "Create a new repository"** on the GitHub page to create your own repository.
+This way, the remote is yours from the start — no extra steps needed to save your notes.
+
+> **If you want to back up personal notes to GitHub, a Private repository is recommended.**
+> Making it Public will expose your research content and unpublished data.
+
+Then clone your new repository using one of the methods below.
 
 #### 1-1. VS Code (Recommended)
 
@@ -38,9 +44,9 @@ No GitHub CLI required — clone directly from the GUI.
    - It's the branching icon (Y-shape) in the left icon bar.
 3. **Click "Clone Repository"**
    - Shown at the top of the Source Control panel.
-4. **Paste the URL and press Enter**
+4. **Paste your repository URL and press Enter**
    ```
-   https://github.com/Ozk-Git/Knowledge_Vault_E.git
+   https://github.com/YOUR_USERNAME/REPO_NAME.git
    ```
 5. **Select a destination folder**
    - In the file dialog, choose the directory where you want to place Knowledge Vault.
@@ -49,15 +55,15 @@ No GitHub CLI required — clone directly from the GUI.
 #### 1-2. Terminal
 
 ```bash
-git clone https://github.com/Ozk-Git/Knowledge_Vault_E.git
-cd Knowledge_Vault_E
+git clone https://github.com/YOUR_USERNAME/REPO_NAME.git
+cd REPO_NAME
 ```
 
 ### 2. Launch an AI Agent
 
-Launch your preferred AI agent (Claude Code, Gemini CLI, Codex, or VS Code + Gemini Code Assist) in this directory (Knowledge_Vault_E).
+Launch your preferred AI agent (Claude Code, Gemini CLI, or Codex) in this directory.
 
-The easiest way to start is to install the **Gemini Code Assist** extension in VS Code, then enable Agent mode. This gives you nearly the same capabilities as Gemini CLI.
+> ⚠️ **Gemini Code Assist (VS Code extension) is not supported.** The Agent mode's file access limitations prevent the session start procedure from completing. Use Gemini CLI instead.
 
 If you prefer Obsidian, install the ACP plugin:
 https://github.com/RAIT-09/obsidian-agent-client

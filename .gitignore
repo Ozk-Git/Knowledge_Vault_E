@@ -1,0 +1,19 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code workspace files (local environment specific)
+*.code-workspace
+
+# Obsidian settings
+.obsidian/
+
+# Environment secrets
+.env
+.env.*
+
+# Large binary files (PDFs, ebooks, etc.)
+# To back these up, use git-lfs or a separate storage solution
+*.pdf
+*.epub
+*.mobi
