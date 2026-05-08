@@ -156,24 +156,72 @@ When the author (user) responds with counter-arguments or questions after the re
 Read multiple papers related to a theme or research question across the board,
 and map the field's consensus, contradictions, and gaps.
 
+### Step 0 — Query Variant Generation and Discipline Detection
+
+Generate **3–5 search variants** from the user's theme:
+- Original query as-is
+- Synonyms / related terms
+- Broader category
+- More specific sub-topic
+- If non-English: English equivalent too
+
+Infer the discipline and determine which databases to use:
+
+Semantic Scholar and OpenAlex are always used regardless of discipline.
+Add the following based on discipline:
+
+| Discipline | Additional DB |
+|---|---|
+| Medical / life sciences | PubMed |
+| CS / math / physics | arXiv |
+| Social sciences / humanities | None |
+
 ### Step 1 — Collect Literature Candidates
 
-Search in the following order and present a prioritized candidate list:
+**Execution order**:
 
-1. **Zotero library**: If Zotero MCP is available, check your reading stock first
-2. **Consensus MCP**: AI-driven semantic relevance search (authentication required — say "I want to use Consensus" and the authentication flow will be guided)
-3. **Semantic Scholar MCP**: Use if installed (see "Recommended MCPs" below)
-4. **PubMed MCP**: Comprehensive search for life sciences (available)
-5. **Scholar Gateway MCP**: Covers a wider range of fields (authentication required)
+1. **Zotero library** (first, sequential): If Zotero MCP is available, check your reading stock first (avoid reinventing the wheel)
+2. Run the following **in parallel**:
+   - **Semantic Scholar MCP**: Always use if installed (rate limit: 1 request/second)
+   - **PubMed MCP**: Life sciences (if determined in Step 0)
+   - **OpenAlex MCP**: Always use
+   - **arXiv**: CS / math / physics (if determined in Step 0)
 
-Present candidates with reading priority and the reason for each. The user decides which to adopt.
+> **Role of Consensus MCP**: Do not use for primary search. Use it during Step 3 (individual reading) to verify field consensus and semantic relevance.
 
-### Step 2 — Read Individual Papers
+### Error Handling
+
+| Situation | Response |
+|---|---|
+| **Rate limit (429)** | Wait 60 seconds, retry once. If unresolved, skip that DB and note in results |
+| **0 results across all DBs** | Suggest switching to broader query variants |
+| **Non-Latin script query** | Also search with transliterated / English variants in parallel |
+| **MCP not connected** | Skip that DB and continue with available DBs only |
+| **Multiple Semantic Scholar queries** | Run sequentially with 1+ second intervals between variants |
+
+### Step 2 — Deduplicate and Rank
+
+**Deduplication**:
+1. Normalize DOIs (lowercase, strip URL prefix)
+2. Group by DOI — keep richest metadata
+3. No DOI: fuzzy match by title (>80% similarity)
+
+**Ranking**:
+Sort by `relevance score × log(citation count + 1)` and present top 20.
+
+| # | Authors | Title | Year | Venue | Cites | DOI | OA |
+|---|---------|-------|------|-------|-------|-----|----|
+
+Present with priority and rationale. The user decides which to adopt.
+
+### Step 3 — Read Individual Papers
 
 Read each adopted paper following Mode A Step 1.
 Sequentially create `Literature/[AuthorYear]-[keyword].md` files.
 
-### Step 3 — Cross-Paper Integration
+When verification of concepts or field consensus is needed during reading, use **Consensus MCP**.
+
+### Step 4 — Cross-Paper Integration
 
 After reading all papers, create an integration report with the following perspectives:
 
@@ -189,7 +237,7 @@ Questions no paper addresses — unresolved challenges. Present as `#open-questi
 **Relevance to My Research**
 Implications for active `Papers/` projects.
 
-### Step 4 — Propose Wiki Page Creation
+### Step 5 — Propose Wiki Page Creation
 
 When integrated content reaches sufficient volume,
 propose creating a `#wiki`-tagged knowledge integration page in `Permanent/`.
