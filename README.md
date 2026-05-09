@@ -305,6 +305,13 @@ An Obsidian vault template for engineers who use Claude Code as a thinking partn
 https://github.com/breferrari/obsidian-mind
 License: MIT
 
+**katmer-code** by hkcanan
+A collection of academic research skills for Claude Code.
+https://github.com/hkcanan/katmer-code
+License: MIT
+
+The agent designs for journal matching, citation verification, and research gap analysis served as references for `submission.md` (Step 0), `paperdesk-review.md` (Steps 2 & 3), and `paperdesk-survey.md` (Step 4b).
+
 **LLM Wiki** by Andrej Karpathy
 A pattern for building personal knowledge bases using LLMs.
 https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
