@@ -86,9 +86,9 @@ Targets: Unprocessed files in `Clippings/`, paper PDFs and books under `Referenc
 
 Use the appropriate prompt based on source type:
 - **Paper PDF** (under `References/papers/`)
-  → Apply **Mode A (Reading)** in `templates/paperdesk.md`
+  → Apply `templates/paperdesk-read.md`
 - **Peer-review simulation of your own paper**
-  → Apply **Mode B (Review)** in `templates/paperdesk.md`
+  → Apply `templates/paperdesk-review.md`
 - **Books and other sources** (under `References/books/`, `Clippings/`, `Daily/`)
   → Follow the standard procedure in `Literature/AGENTS.md`
 
