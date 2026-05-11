@@ -3,70 +3,40 @@
 This Vault is a researcher's external knowledge system supporting the flow:
 Capture → Knowledge → Output.
 
+The root `AGENTS.md` is an entry point. Detailed procedures are delegated to `rules/` and directory-specific `AGENTS.md` files.
+
 ---
 
-## Session Start
+## Sessions
+
+### Session Start
 
 **Trigger**: "Start a session" / "Please start the session"
 
-1. Read `index.md` to get an overview of the entire Vault
-2. If actual file counts or update status matter, verify the real directory rather than trusting `index.md` blindly
-3. Check the last 5 entries in `log.md` to identify tasks carried over from the previous session
-4. If `log.md` records appear insufficient, refer to actual files or Git history as needed
-5. Based on the information below, propose up to 3 tasks to tackle this session (in priority order):
-   - Number of unprocessed items in `Inbox/` and `Clippings/` (include counts)
-   - Notes tagged `#llm-draft` left untouched for more than 2 weeks
-   - Unresolved items in `Papers/*/03_gaps.md` (`status: open / in-progress`)
-   - Carry-over tasks from `log.md`
-6. Run Probe and include the results in the session-start report
-7. Report the current Vault status
+Follow `rules/workflows.md#session-start`: check `index.md`, `log.md`, unprocessed item counts, and Probe results, then propose up to 3 tasks for the session.
 
-## Session End
+### Session End
 
 **Trigger**: "End the session" / "Please end the session"
 
-1. Update `index.md` as a derived summary, to the extent necessary
-2. Append major changes and decisions to `log.md` as a supplementary operation log
-   Format: `## [YYYY-MM-DD] {Operation} | {Content}`
-3. If new questions or half-formed ideas emerged this session, propose adding a memo to `Inbox/`
-4. Summarize the key points of this session's work in 3 lines or fewer as a closing report
+Follow `rules/workflows.md#session-end`: update `index.md` and `log.md` as needed, then summarize the session in 3 lines or fewer.
 
 ---
 
-## Directory Roles
+## Directory Operations
 
-### Clippings/
-Temporary holding area for lightweight external sources: web articles, saved social media posts, etc.
-Processed files are moved to `Clippings/Done/`.
+For the overall Vault structure and directory roles, see `rules/architecture.md`.
 
-### References/
-Permanent archive for paper PDFs and books. **Do not delete. Do not move to Done/.**
-Follow the rules in `References/AGENTS.md`.
+If a subdirectory contains an `AGENTS.md`, read it before operating in that directory.
 
-### Daily/
-Daily observations, experiment notes, and meeting memos.
-Periodically promote these to `Inbox/` or `Literature/`.
-If a note is already close to one-note-one-idea, it may be Promoted directly from `Daily/` to `Permanent/`.
-
-### Inbox/
-Drop zone for fleeting thoughts and rough notes.
-Processed files are moved to `Inbox/Done/`.
-
-### Literature/
-Literature and source notes generated from `Clippings/`, `References/`, and `Daily/`.
-AI creates the initial draft; humans edit. Follow `Literature/AGENTS.md`.
-
-### Permanent/
-The core of the knowledge system. Manages permanent notes and Wiki integration pages.
-Follow `Permanent/AGENTS.md`.
-
-### Papers/
-Per-paper workspaces managed as `Papers/[paper-slug]/`.
-Follow `Papers/AGENTS.md`.
+- `Literature/` → `Literature/AGENTS.md`
+- `Permanent/` → `Permanent/AGENTS.md`
+- `Papers/` → `Papers/AGENTS.md`
+- `References/` → `References/AGENTS.md`
 
 ---
 
-## Principles
+## Core Principles
 
 - **AI creates drafts. Final judgment and editing are done by humans.**
 - Always tag AI-generated notes with `#llm-draft`
@@ -79,64 +49,29 @@ Follow `Papers/AGENTS.md`.
 
 ---
 
-## Operation Definitions
+## Operations
 
-### Ingest — Source Ingestion
-Targets: Unprocessed files in `Clippings/`, paper PDFs and books under `References/`, memos in `Daily/`
-
-Use the appropriate prompt based on source type:
-- **Paper PDF** (under `References/papers/`)
-  → Apply `templates/paperdesk-read.md`
-- **Peer-review simulation of your own paper**
-  → Apply `templates/paperdesk-review.md`
-- **Books and other sources** (under `References/books/`, `Clippings/`, `Daily/`)
-  → Follow the standard procedure in `Literature/AGENTS.md`
-
-### Promote — Create Permanent Note
-Targets: `Inbox/`, `Literature/`, or `Daily/` notes ready for direct promotion
-Follow `Permanent/AGENTS.md`.
-
-### Wiki-Update — Update Knowledge Integration Pages
-Targets: Concept, entity, and comparison pages within `Permanent/`
-Follow `Permanent/AGENTS.md`.
-
-### Paper-Work — Paper Writing Management
-Targets: `Papers/[paper-slug]/`
-Follow `Papers/AGENTS.md`.
-
-### Lint — Vault Health Check
-Run periodically or on demand:
-
-- Detailed checks follow `rules/lint.md`
-- **AGENTS.md bloat check**: If the root `AGENTS.md` exceeds 170 lines, propose at session start to move redundant detail to `rules/workflows.md`
-
-### Probe — Proactive Inquiry
-Run automatically at session start.
-
-- Search recently Ingested notes for contradiction, complementarity, or extension relationships with existing Permanent notes, and report findings
-- Flag `status: confirmed` Claims whose supporting evidence appears thin
-- From `#open-question` notes, suggest ones that existing knowledge may already answer
-- Highlight 1–2 long-neglected Permanent notes and prompt connection with recent knowledge
-
-### Connect — Serendipity Exploration
-Run on demand or alongside Lint. See `rules/workflows.md` for details.
-
-### Remember — Save Discussion to Memory
-**Trigger**: "Please save this discussion to memory"
-See `rules/workflows.md` for details.
+- Ingest — Source ingestion: `rules/workflows.md#ingest`
+- Promote — Create permanent notes: `Permanent/AGENTS.md`
+- Wiki-Update — Update knowledge integration pages: `Permanent/AGENTS.md`
+- Paper-Work — Paper writing management: `Papers/AGENTS.md`
+- PaperDesk — Paper search, reading, review, survey, and evidence checks: `rules/workflows.md#paperdesk`
+- Lint — Vault health check: `rules/lint.md`
+- Probe — Proactive inquiry: `rules/workflows.md#probe`
+- Connect — Serendipity exploration: `rules/workflows.md#connect`
+- Remember — Save discussion to memory: `rules/workflows.md#remember`
 
 ---
 
-## Per-Directory Additional Rules
+## PaperDesk Overview
 
-If a subdirectory contains an `AGENTS.md`, read it before operating in that directory.
+Use PaperDesk for paper search, reading, peer-review simulation, cross-paper surveys, and scientific evidence checks.
+Detailed mode selection and execution scope are defined in `rules/workflows.md#paperdesk`.
 
-- `Literature/` → `Literature/AGENTS.md`
-- `Permanent/` → `Permanent/AGENTS.md`
-- `Papers/` → `Papers/AGENTS.md`
-- `References/` → `References/AGENTS.md`
-
----
+- Mode A / read: Read and integrate one external paper into the Vault
+- Mode B / review: Critically evaluate the user's own manuscript before submission
+- Mode C / survey: Survey multiple papers across a topic or research question
+- Mode D / evidence-check: Check the support status of a scientific claim
 
 ## System Improvement
 
